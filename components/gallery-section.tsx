@@ -2,82 +2,103 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { ChevronLeft, ChevronRight, X } from "lucide-react"
 
 import { Button } from 'primereact/button'
+import { Image as PrimeImage } from 'primereact/image'
 
 import { cn } from "@/lib/utils"
 
 const galleryImages = [
   {
-    src: "/gallery/image1.jpg",
-    alt: "Detailed single-engine aircraft exterior",
+    src: "/gallery/clean-vwing-c.jpg",
+    alt: "Clean aircraft wing detail",
     category: "exterior",
   },
   {
-    src: "/gallery/image2.jpg",
-    alt: "Polished private jet interior",
+    src: "/gallery/cockpit-c.jpg",
+    alt: "Professional cockpit detailing",
     category: "interior",
   },
   {
-    src: "/gallery/image3.jpg",
-    alt: "Detailed cockpit of a small aircraft",
+    src: "/gallery/cockpit-man-c.jpg",
+    alt: "Pilot in detailed cockpit",
     category: "interior",
   },
   {
-    src: "/gallery/image4.jpg",
-    alt: "Freshly waxed twin-engine aircraft",
+    src: "/gallery/twin-jet-c.jpg",
+    alt: "Twin jet aircraft exterior",
     category: "exterior",
   },
   {
-    src: "/gallery/image5.jpg",
-    alt: "Detailed jet engine",
+    src: "/gallery/prop-focus-c.jpg",
+    alt: "Aircraft propeller detail",
     category: "specialty",
   },
   {
-    src: "/gallery/image6.jpg",
-    alt: "Luxury aircraft cabin after detailing",
+    src: "/gallery/cockpit-woman-c.jpg",
+    alt: "Female pilot in clean cockpit",
     category: "interior",
   },
   {
-    src: "/gallery/image7.jpg",
-    alt: "Before and after of aircraft paint correction",
+    src: "/gallery/turbo-prop-c.jpg",
+    alt: "Turbo prop aircraft exterior",
     category: "exterior",
   },
   {
-    src: "/gallery/image8.jpg",
-    alt: "Detailed landing gear",
+    src: "/gallery/heading-indicator-c.jpg",
+    alt: "Detailed aircraft instruments",
     category: "specialty",
+  },
+  {
+    src: "/gallery/quad-prop-c.jpg",
+    alt: "Four-engine aircraft detail",
+    category: "exterior",
+  },
+  {
+    src: "/gallery/open-cockpit-c.jpg",
+    alt: "Open cockpit aircraft interior",
+    category: "interior",
+  },
+  {
+    src: "/gallery/cowling-inspection-c.jpg",
+    alt: "Engine cowling inspection",
+    category: "specialty",
+  },
+  {
+    src: "/gallery/sunset-landing-configuration-c.jpg",
+    alt: "Aircraft in landing configuration at sunset",
+    category: "exterior",
+  },
+  {
+    src: "/gallery/cessna-underbelly-c.jpg",
+    alt: "Cessna aircraft underbelly detail",
+    category: "exterior",
+  },
+  {
+    src: "/gallery/light-sport-c.jpg",
+    alt: "Light sport aircraft",
+    category: "exterior",
+  },
+  {
+    src: "/gallery/sweepback-jet-c.jpg",
+    alt: "Swept-wing jet aircraft",
+    category: "exterior",
+  },
+  {
+    src: "/gallery/v-wing-c.jpg",
+    alt: "V-wing aircraft configuration",
+    category: "exterior",
   },
 ]
 
 export function GallerySection() {
   const [filter, setFilter] = useState<string>("all")
-  const [lightboxOpen, setLightboxOpen] = useState(false)
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   const filteredImages = filter === "all" ? galleryImages : galleryImages.filter((img) => img.category === filter)
 
-  const openLightbox = (index: number) => {
-    setCurrentImageIndex(index)
-    setLightboxOpen(true)
-  }
-
-  const closeLightbox = () => {
-    setLightboxOpen(false)
-  }
-
-  const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev === filteredImages.length - 1 ? 0 : prev + 1))
-  }
-
-  const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev === 0 ? filteredImages.length - 1 : prev - 1))
-  }
-
   return (
-    <section id="gallery" className="py-20 bg-black text-white">
-      <div className="container">
+    <section id="gallery" className="py-20 bg-black text-white overflow-hidden">
+      <div className="container max-w-7xl mx-auto px-4">
         <div className="mb-12 text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Our Work</h2>
           <p className="mt-4 text-lg text-gray-400">Browse our gallery of premium aircraft detailing</p>
@@ -124,69 +145,27 @@ export function GallerySection() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-full">
           {filteredImages.map((image, index) => (
             <div
               key={index}
-              className="relative aspect-square overflow-hidden rounded-lg cursor-pointer group"
-              onClick={() => openLightbox(index)}
+              className="relative aspect-square overflow-hidden rounded-lg group max-w-full"
             >
-              <Image
-                src={image.src || "/placeholder.svg"}
+              <PrimeImage
+                src={image.src}
                 alt={image.alt}
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-110"
+                width="100%"
+                height="100%"
+                preview
+                className="w-full h-full max-w-full"
+                imageClassName="object-cover w-full h-full rounded-lg max-w-full"
+                style={{ maxWidth: '100%', width: '100%', height: '100%' }}
               />
-              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <span className="text-white text-sm font-medium">View Image</span>
-              </div>
             </div>
           ))}
         </div>
 
-        {lightboxOpen && (
-          <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center">
-            <Button
-              text
-              rounded
-              className="absolute top-4 right-4 text-white hover:bg-white/10 p-2"
-              onClick={closeLightbox}
-              icon={<X className="h-6 w-6" />}
-            />
 
-            <Button
-              text
-              rounded
-              className="absolute left-4 text-white hover:bg-white/10 p-2"
-              onClick={prevImage}
-              icon={<ChevronLeft className="h-8 w-8" />}
-            />
-
-            <div className="relative h-[80vh] w-[80vw]">
-              <Image
-                src={filteredImages[currentImageIndex].src || "/placeholder.svg"}
-                alt={filteredImages[currentImageIndex].alt}
-                fill
-                className="object-contain"
-              />
-            </div>
-
-            <Button
-              text
-              rounded
-              className="absolute right-4 text-white hover:bg-white/10 p-2"
-              onClick={nextImage}
-              icon={<ChevronRight className="h-8 w-8" />}
-            />
-
-            <div className="absolute bottom-4 text-white text-center">
-              <p>{filteredImages[currentImageIndex].alt}</p>
-              <p className="text-sm text-gray-400">
-                {currentImageIndex + 1} of {filteredImages.length}
-              </p>
-            </div>
-          </div>
-        )}
       </div>
     </section>
   )

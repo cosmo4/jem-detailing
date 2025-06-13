@@ -1,8 +1,11 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, ChevronDown, Menu } from "lucide-react"
+import { ChevronDown } from "lucide-react"
 
 import { Button } from "primereact/button"
+import { Navbar } from "@/components/navbar"
 import { ServiceCard } from "@/components/service-card"
 import { GallerySection } from "@/components/gallery-section"
 import { QuoteForm } from "@/components/quote-form"
@@ -11,51 +14,13 @@ import { Footer } from "@/components/footer"
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
-      {/* Header/Navigation */}
-      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Image src="/logo.png" alt="JEM Aviation Detailing" width={40} height={40} className="h-10 w-auto" />
-            <span className="text-xl font-bold tracking-tight">JEM Aviation</span>
-          </div>
-
-          <nav className="hidden md:flex items-center gap-6">
-            <Link href="#services" className="text-sm font-medium hover:text-primary">
-              Services
-            </Link>
-            <Link href="#gallery" className="text-sm font-medium hover:text-primary">
-              Gallery
-            </Link>
-            <Link href="#about" className="text-sm font-medium hover:text-primary">
-              About
-            </Link>
-            <Link href="#contact" className="text-sm font-medium hover:text-primary">
-              Contact
-            </Link>
-          </nav>
-
-          <div className="flex items-center gap-4">
-            <Link href="#quote" className="hidden md:flex">
-              <Button className="flex items-center">
-                Get a Quote <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
-            <Button
-              outlined
-              rounded
-              className="md:hidden"
-              icon={<Menu className="h-5 w-5" />}
-              aria-label="Toggle menu"
-            />
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative h-[90vh] overflow-hidden bg-black">
-          <div className="absolute inset-0 z-10 bg-black/50" />
-          <Image src="/hero-image.jpg" alt="Detailed private jet" fill priority className="object-cover" />
+        <section className="relative h-screen overflow-hidden bg-black">
+          <div className="absolute inset-0 z-10 bg-black/30" />
+          <Image src="/gallery/cessna-mountains-c.jpg" alt="Cessna aircraft in mountain landscape" fill priority className="object-cover opacity-80" />
           <div className="container relative z-20 flex h-full flex-col items-center justify-center text-center text-white">
             <div className="flex items-center justify-center mb-6">
               <Image
@@ -74,16 +39,48 @@ export default function Home() {
               Premium detailing services for private aircraft owners. We treat your plane with the care it deserves.
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
-              <Link href="#services">
+              <Link
+                href="#services"
+                onClick={(e) => {
+                  e.preventDefault()
+                  const element = document.getElementById('services')
+                  if (element) {
+                    const offset = 80
+                    const elementPosition = element.offsetTop - offset
+                    window.scrollTo({ top: elementPosition, behavior: 'smooth' })
+                  }
+                }}
+              >
                 <Button size="large" label="Our Services" />
               </Link>
-              <Link href="#quote">
+              <Link
+                href="#quote"
+                onClick={(e) => {
+                  e.preventDefault()
+                  const element = document.getElementById('quote')
+                  if (element) {
+                    const offset = 80
+                    const elementPosition = element.offsetTop - offset
+                    window.scrollTo({ top: elementPosition, behavior: 'smooth' })
+                  }
+                }}
+              >
                 <Button size="large" outlined label="Request a Quote" />
               </Link>
             </div>
           </div>
-          <div className="absolute bottom-8 left-1/2 z-20 -translate-x-1/2">
-            <ChevronDown className="h-10 w-10 animate-bounce text-white" />
+          <div
+            className="absolute bottom-8 left-1/2 z-20 -translate-x-1/2 cursor-pointer"
+            onClick={() => {
+              const element = document.getElementById('services')
+              if (element) {
+                const offset = 80
+                const elementPosition = element.offsetTop - offset
+                window.scrollTo({ top: elementPosition, behavior: 'smooth' })
+              }
+            }}
+          >
+            <ChevronDown className="h-10 w-10 animate-bounce text-white hover:text-gray-300 transition-colors" />
           </div>
         </section>
 
@@ -149,7 +146,18 @@ export default function Home() {
               <p className="text-muted-foreground mb-6">
                 Custom packages available for all aircraft types and specific needs
               </p>
-              <Link href="#quote">
+              <Link
+                href="#quote"
+                onClick={(e) => {
+                  e.preventDefault()
+                  const element = document.getElementById('quote')
+                  if (element) {
+                    const offset = 80
+                    const elementPosition = element.offsetTop - offset
+                    window.scrollTo({ top: elementPosition, behavior: 'smooth' })
+                  }
+                }}
+              >
                 <Button label="Request Custom Quote" />
               </Link>
             </div>
@@ -208,7 +216,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="relative h-[500px] rounded-lg overflow-hidden">
-                <Image src="/about-image.jpg" alt="JEM Aviation Detailing team at work" fill className="object-cover" />
+                <Image src="/gallery/cowling-inspection-c.jpg" alt="Professional aircraft detailing inspection" fill className="object-cover" />
               </div>
             </div>
           </div>

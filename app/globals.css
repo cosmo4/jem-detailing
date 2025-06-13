@@ -55,7 +55,51 @@
 }
 
 /* Custom base styles */
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
+  overflow-x: hidden;
+}
+
+/* Ensure all containers respect viewport boundaries */
+.container {
+  max-width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Fix PrimeReact Image component overflow */
+.p-image {
+  max-width: 100% !important;
+  width: 100% !important;
+  height: auto;
+  overflow: hidden;
+}
+
+.p-image img {
+  max-width: 100% !important;
+  width: 100% !important;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Ensure grid items don't overflow */
+.grid > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+/* Additional overflow protection */
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
