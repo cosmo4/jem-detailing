@@ -4,7 +4,7 @@ import { Facebook, Instagram, Mail, Phone } from "lucide-react"
 
 export function Footer() {
   return (
-    <footer className="bg-black text-white">
+    <footer className="bg-black px-10 text-white">
       <div className="container py-12">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div>
@@ -13,7 +13,7 @@ export function Footer() {
               <span className="text-xl font-bold">JEM Aviation</span>
             </div>
             <p className="text-gray-400 mb-4">Premium aircraft detailing services for private plane owners.</p>
-            <p className="italic text-sm text-gray-500">"Cut like a Diamond, Cleaned to Fly"</p>
+            <p className="italic text-sm text-gray-500">&quot;Cut like a Diamond, Cleaned to Fly&quot;</p>
           </div>
 
           <div>
@@ -66,6 +66,15 @@ export function Footer() {
                 </a>
               </li>
             </ul>
+            <div className="mt-4 p-3 bg-red-600/20 rounded-lg border border-red-400/30">
+              <div className="flex items-center gap-2 mb-1">
+                <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse"></div>
+                <span className="text-red-200 font-medium text-sm">Urgent Service</span>
+              </div>
+              <p className="text-xs text-red-100">
+                24/7 response available for time-sensitive cleaning needs
+              </p>
+            </div>
           </div>
 
           <div>

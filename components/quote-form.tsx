@@ -19,6 +19,7 @@ export function QuoteForm() {
     { label: 'Essential Detail', value: 'essential' },
     { label: 'Premium Detail', value: 'premium' },
     { label: 'Diamond Detail', value: 'diamond' },
+    { label: 'Urgent Detail', value: 'urgent' },
     { label: 'Custom Package', value: 'custom' }
   ]
 
@@ -26,6 +27,10 @@ export function QuoteForm() {
     <div className="mb-12 text-center">
       <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Request a Quote</h2>
       <p className="mt-4 text-lg text-gray-400">Tell us about your aircraft and detailing needs</p>
+      <div className="mt-4 inline-flex items-center gap-2 bg-red-600/20 px-4 py-2 rounded-full border border-red-400/30">
+        <div className="w-2 h-2 bg-red-400 rounded-full animate-pulse"></div>
+        <span className="text-red-200 font-medium text-sm">Urgent & same-day service available</span>
+      </div>
     </div>
   )
 
@@ -33,14 +38,14 @@ export function QuoteForm() {
     <div className="flex items-center gap-2">
       <Plane className="h-5 w-5" />
       <h3 className="text-lg font-semibold">Aircraft Details</h3>
-      <p className="text-sm text-gray-400 ml-auto">Fill out the form below for a custom quote</p>
+      <p className="text-sm text-gray-700 ml-auto">Fill out the form below for a custom quote</p>
     </div>
   )
 
   const googleFormHeader = (
     <div>
       <h3 className="text-lg font-semibold">Google Form</h3>
-      <p className="text-sm text-gray-400">Fill out our Google Form for a detailed quote</p>
+      <p className="text-sm text-gray-700">Fill out our Google Form for a detailed quote</p>
     </div>
   )
 
@@ -51,7 +56,7 @@ export function QuoteForm() {
           {header}
 
           <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
-            <TabPanel header="Custom Form">
+            <TabPanel header="Custom Form" className="text-black">
               <Card className="border-white/10 bg-black/30 text-white">
                 <div className="p-4">
                   {customFormHeader}
@@ -62,7 +67,7 @@ export function QuoteForm() {
                         <InputText
                           id="name"
                           placeholder="John Doe"
-                          className="w-full bg-black/20 border-white/10"
+                          className="w-full"
                         />
                       </div>
                       <div className="space-y-2">
@@ -71,7 +76,7 @@ export function QuoteForm() {
                           id="email"
                           type="email"
                           placeholder="john@example.com"
-                          className="w-full bg-black/20 border-white/10"
+                          className="w-full"
                         />
                       </div>
                     </div>
@@ -82,7 +87,7 @@ export function QuoteForm() {
                         <InputText
                           id="phone"
                           placeholder="(123) 456-7890"
-                          className="w-full bg-black/20 border-white/10"
+                          className="w-full"
                         />
                       </div>
                       <div className="space-y-2">
@@ -90,7 +95,7 @@ export function QuoteForm() {
                         <InputText
                           id="location"
                           placeholder="KTRK - Truckee Tahoe Airport"
-                          className="w-full bg-black/20 border-white/10"
+                          className="w-full"
                         />
                       </div>
                     </div>
@@ -147,7 +152,7 @@ export function QuoteForm() {
                         <InputText
                           id="make"
                           placeholder="Cessna, Cirrus, Gulfstream, etc."
-                          className="w-full bg-black/20 border-white/10"
+                          className="w-full"
                         />
                       </div>
                       <div className="space-y-2">
@@ -155,27 +160,43 @@ export function QuoteForm() {
                         <InputText
                           id="model"
                           placeholder="172, SR22, G650, etc."
-                          className="w-full bg-black/20 border-white/10"
+                          className="w-full"
                         />
                       </div>
                     </div>
 
-                    <div className="space-y-2">
-                      <label htmlFor="package" className="text-sm font-medium block">Desired Package</label>
-                      <Dropdown
-                        id="package"
-                        options={packageOptions}
-                        placeholder="Select a package"
-                        className="w-full bg-black/20 border-white/10"
-                      />
+                    <div className="grid gap-4 md:grid-cols-2">
+                      <div className="space-y-2">
+                        <label htmlFor="package" className="text-sm font-medium block">Desired Package</label>
+                        <Dropdown
+                          id="package"
+                          options={packageOptions}
+                          placeholder="Select a package"
+                          className="w-full"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label htmlFor="urgency" className="text-sm font-medium block">Service Urgency</label>
+                        <Dropdown
+                          id="urgency"
+                          options={[
+                            { label: 'Standard (3-7 days)', value: 'standard' },
+                            { label: 'Priority (1-2 days)', value: 'priority' },
+                            { label: 'Urgent (Same day)', value: 'urgent' },
+                            { label: 'ASAP (Within hours)', value: 'asap' }
+                          ]}
+                          placeholder="Select urgency level"
+                          className="w-full"
+                        />
+                      </div>
                     </div>
 
                     <div className="space-y-2">
                       <label htmlFor="message" className="text-sm font-medium block">Additional Details</label>
                       <InputTextarea
                         id="message"
-                        placeholder="Tell us about any specific areas of concern or special requests..."
-                        className="w-full min-h-[100px] bg-black/20 border-white/10"
+                        placeholder="Tell us about any specific areas of concern, special requests, or urgent timeline requirements..."
+                        className="w-full min-h-[100px]"
                         rows={5}
                       />
                     </div>
@@ -186,7 +207,7 @@ export function QuoteForm() {
               </Card>
             </TabPanel>
 
-            <TabPanel header="Google Form">
+            <TabPanel header="Google Form" className="text-black">
               <Card className="border-white/10 bg-black/30 text-white">
                 <div className="p-4">
                   {googleFormHeader}

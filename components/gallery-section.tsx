@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
 
 import { Button } from 'primereact/button'
 import { Image as PrimeImage } from 'primereact/image'
@@ -109,7 +108,7 @@ export function GallerySection() {
             <Button
               text
               className={cn(
-                "rounded-l-md rounded-r-none border border-white/20",
+                "rounded-l-md py-2 px-4 rounded-r-none border border-white/20",
                 filter === "all" ? "bg-white text-black" : "text-white hover:bg-white/10",
               )}
               onClick={() => setFilter("all")}
@@ -118,7 +117,7 @@ export function GallerySection() {
             <Button
               text
               className={cn(
-                "rounded-none border-y border-r border-white/20",
+                "rounded-none py-2 px-4 border-y border-r border-white/20",
                 filter === "exterior" ? "bg-white text-black" : "text-white hover:bg-white/10",
               )}
               onClick={() => setFilter("exterior")}
@@ -127,7 +126,7 @@ export function GallerySection() {
             <Button
               text
               className={cn(
-                "rounded-none border-y border-r border-white/20",
+                "rounded-none py-2 px-4 border-y border-r border-white/20",
                 filter === "interior" ? "bg-white text-black" : "text-white hover:bg-white/10",
               )}
               onClick={() => setFilter("interior")}
@@ -136,7 +135,7 @@ export function GallerySection() {
             <Button
               text
               className={cn(
-                "rounded-r-md rounded-l-none border border-white/20",
+                "rounded-r-md py-2 px-4 rounded-l-none border border-white/20",
                 filter === "specialty" ? "bg-white text-black" : "text-white hover:bg-white/10",
               )}
               onClick={() => setFilter("specialty")}
